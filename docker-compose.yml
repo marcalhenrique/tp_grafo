@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  tp_grafo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tp_grafo
+    ports:
+      - "8501:8501"
+    restart: always
+    volumes:
+      - .:/app
