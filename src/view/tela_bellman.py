@@ -13,7 +13,61 @@ class ViewBellmanFord():
 
     def bellman_ford(self):
         st.title("Algoritmo de Bellman-Ford")
-        st.write("O algoritmo de Bellman-Ford encontra o caminho mais curto de um vértice para todos os outros em um grafo ponderado, mesmo com pesos negativos. Ele também detecta ciclos negativos.")
+        
+        st.subheader("Passo a Passo do Algoritmo")
+        st.markdown("""
+        1. **Inicialização:**
+        - `distancia[origem] = 0`: A distância da origem para ela mesma é zero.
+        - `anterior`: Todos os valores são inicializados como `None`.
+
+        2. **Relaxamento das Arestas:**
+        - O algoritmo realiza o relaxamento das arestas **|V| - 1** vezes, onde |V| é o número de nós no grafo.
+        - Para cada aresta `(u, v)` com peso `custo`, ele verifica se a distância de `u` até `v` pode ser melhorada:
+            ```python
+            if distancia[u] + custo < distancia[v]:
+                distancia[v] = distancia[u] + custo
+                anterior[v] = u
+            ```
+
+        3. **Verificação de Ciclos Negativos:**
+        - Após o relaxamento, o algoritmo verifica se ainda é possível melhorar alguma distância. Se sim, isso indica a presença de um **ciclo negativo**.
+        - Se um ciclo negativo for detectado, o algoritmo retorna `None, None, True`.
+
+        4. **Resultado:**
+        - Se não houver ciclos negativos, o algoritmo retorna os dicionários `distancia` e `anterior`, além de `False` para indicar a ausência de ciclos negativos.
+        """)
+
+        # Explicação da função `menor_caminho`
+        st.header("2. Função `menor_caminho`")
+        st.markdown("""
+        A função `menor_caminho` reconstrói o caminho mais curto entre a **origem** e o **destino** usando o dicionário `anterior`.
+        """)
+
+        st.subheader("Passo a Passo da Função")
+        st.markdown("""
+        1. **Inicialização:**
+        - `caminho`: Uma lista vazia para armazenar o caminho.
+        - `atual`: Começa no nó de destino.
+
+        2. **Reconstrução do caminho:**
+        - Enquanto `atual` não for `None`, adiciona `atual` ao `caminho` e move para o nó anterior (`atual = anterior[atual]`).
+        - No final, inverte a lista `caminho` para obter a ordem correta.
+
+        3. **Verificação:**
+        - Se o caminho começa na origem (`caminho[0] == origem`), retorna o caminho.
+        - Caso contrário, retorna uma lista vazia, indicando que não há caminho possível.
+        """)
+
+        # Comparações e Operações
+        st.header("3. Comparações e Operações")
+        st.markdown("""
+        - **Relaxamento:**
+        - O algoritmo compara constantemente as distâncias para determinar se uma aresta pode ser relaxada (`distancia[u] + custo < distancia[v]`).
+        - Essa operação é realizada **|V| - 1** vezes para garantir que todas as distâncias mínimas sejam encontradas.
+
+        - **Detecção de Ciclos Negativos:**
+        - Após o relaxamento, o algoritmo verifica se ainda é possível melhorar alguma distância. Se sim, isso indica a presença de um ciclo negativo.
+        """)
 
         st.image(self.graph_image, caption="Algoritmo de Bellman-Ford", use_container_width=True)
 

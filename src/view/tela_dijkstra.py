@@ -13,8 +13,54 @@ class ViewDijkstra():
 
     def dijkstra(self):
         st.title("Algoritmo de Dijkstra")
-        st.write("O algoritmo de Dijkstra é um algoritmo de caminho mínimo que encontra o caminho mais curto entre dois nós em um grafo ponderado.")
-        st.write("Alguma coisa")
+        st.subheader("Passo a Passo do Algoritmo")
+        st.markdown("""
+        1. **Inicialização:**
+        - `distancia[origem] = 0`: A distância da origem para ela mesma é zero.
+        - `nao_visitados`: Contém todos os nós do grafo.
+
+        2. **Loop Principal:**
+        - Enquanto houver nós não visitados:
+            1. **Escolha do nó atual (`u`):**
+                - Seleciona o nó não visitado com a menor distância conhecida (`min(nao_visitados, key=lambda v: distancia[v])`).
+            2. **Remoção do nó atual:**
+                - Remove o nó `u` da lista de nós não visitados.
+            3. **Atualização das distâncias:**
+                - Para cada vizinho `v` do nó `u`, calcula a distância total (`custo_total = distancia[u] + custo`).
+                - Se `custo_total` for menor que a distância atual de `v`, atualiza `distancia[v]` e define `anterior[v] = u`.
+        """)
+
+        # Explicação da função `menor_caminho`
+        st.header("2. Função `menor_caminho`")
+        st.markdown("""
+        A função `menor_caminho` reconstrói o caminho mais curto entre a **origem** e o **destino** usando o dicionário `anterior`.
+        """)
+
+        st.subheader("Passo a Passo da Função")
+        st.markdown("""
+        1. **Inicialização:**
+        - `caminho`: Uma lista vazia para armazenar o caminho.
+        - `atual`: Começa no nó de destino.
+
+        2. **Reconstrução do caminho:**
+        - Enquanto `atual` não for `None`, adiciona `atual` ao `caminho` e move para o nó anterior (`atual = anterior[atual]`).
+        - No final, inverte a lista `caminho` para obter a ordem correta.
+
+        3. **Verificação:**
+        - Se o caminho começa na origem (`caminho[0] == origem`), retorna o caminho.
+        - Caso contrário, retorna uma lista vazia, indicando que não há caminho possível.
+        """)
+
+        # Comparações e Operações
+        st.header("3. Comparações e Operações")
+        st.markdown("""
+        - **Comparação de distâncias:**
+        - O algoritmo compara constantemente as distâncias para determinar o nó com a menor distância atual (`min(nao_visitados, key=lambda v: distancia[v])`).
+        - Também compara `custo_total` com `distancia[v]` para decidir se uma atualização é necessária.
+
+        - **Atualizações:**
+        - As distâncias e os nós anteriores são atualizados sempre que um caminho mais curto é encontrado.
+        """)
         st.image(self.graph_image, caption="Algoritmo de Dijkstra", use_container_width=True)
         
         origem = st.number_input("Origem", min_value=1, max_value=10, step=1)

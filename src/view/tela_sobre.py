@@ -6,4 +6,4 @@ class ViewSobre():
 
     def sobre(self):
         st.title("Sobre")
-        st.write("Este é um projeto desenvolvido para a disciplina de Teoria dos Grafos, do curso de Engenharia de Computação da Universidade Federal do Ceará (UFC).")
+        st.write("Este é um projeto desenvolvido pelos alunos Bruno Augusto e Marçal Henrique para a disciplina de Técnicas de Programação, ministrada pela professora Natália Camillo, como requisito para a obtenção de créditos parcias do curso de Engenharia de Computação da Universidade Federal de Minas Gerais - Campus Bambuí (IFMG).")
